@@ -1,1 +1,1 @@
-# python_course_content
+# learning-python-course
