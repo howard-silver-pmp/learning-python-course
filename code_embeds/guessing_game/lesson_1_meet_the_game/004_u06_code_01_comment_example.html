@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Comment example</title>
+  <style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: Arial, sans-serif;
+}
+.code-card {
+  border: 1px solid #3c3c3c;
+  border-radius: 10px;
+  background: #1e1e1e;
+  overflow: hidden;
+}
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #252526;
+  border-bottom: 1px solid #3c3c3c;
+}
+.code-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.code-meta {
+  font-size: 12px;
+  color: #c8c8c8;
+  margin-top: 2px;
+}
+.copy-button {
+  border: 1px solid #6a6a6a;
+  border-radius: 6px;
+  background: #333333;
+  color: #ffffff;
+  padding: 7px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.copy-button:hover { background: #3f3f46; }
+pre.highlight {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 4;
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.55;
+  background: #1e1e1e;
+  color: #d4d4d4;
+}
+.visually-hidden { display: none; }
+.tok-comment { color: #9AA7B3; }
+.tok-todo { color: #F97583; font-weight: 700; }
+.tok-keyword { color: #C586C0; }
+.tok-module { color: #4EC9B0; }
+.tok-imported { color: #4EC9B0; }
+.tok-class { color: #4EC9B0; }
+.tok-function { color: #DCDCAA; }
+.tok-builtin { color: #C586C0; }
+.tok-string { color: #9CDCFE; }
+.tok-fstring-expr { color: #D7BA7D; }
+.tok-number { color: #B5CEA8; }
+.tok-constant { color: #9CDCFE; }
+.tok-variable { color: #D4D4D4; }
+.tok-operator { color: #D4D4D4; }
+.tok-punctuation { color: #D4D4D4; }
+</style>
+</head>
+<body>
+  <div class="code-card">
+    <div class="code-header">
+      <div>
+        <div class="code-title">Comment example</div>
+        <div class="code-meta">Python · guessing_game.py · VS Code Dark 2026</div>
+      </div>
+      <button class="copy-button" type="button" onclick="copyCode()" id="copyButton">Copy Code</button>
+    </div>
+    <pre class="highlight"><code><span class="tok-comment"># Store the secret number the player is trying to guess</span>
+<span class="tok-variable">secret_number</span> <span class="tok-operator">=</span> <span class="tok-number">5</span></code></pre>
+  </div>
+  <textarea class="visually-hidden" id="rawCode"># Store the secret number the player is trying to guess
+secret_number = 5</textarea>
+  <script>
+    async function copyCode() {
+      const text = document.getElementById('rawCode').value;
+      const button = document.getElementById('copyButton');
+      try {
+        await navigator.clipboard.writeText(text);
+        button.textContent = 'Copied';
+        setTimeout(() => button.textContent = 'Copy Code', 1600);
+      } catch (error) {
+        const area = document.getElementById('rawCode');
+        area.classList.remove('visually-hidden');
+        area.select();
+        document.execCommand('copy');
+        area.classList.add('visually-hidden');
+        button.textContent = 'Copied';
+        setTimeout(() => button.textContent = 'Copy Code', 1600);
+      }
+    }
+  </script>
+</body>
+</html>
