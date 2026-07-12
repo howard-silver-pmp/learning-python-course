@@ -1,6 +1,6 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "name": "learning-python-course-assets",
+  "name": "learning-python-course",
   "compatibility_date": "2026-07-12",
   "assets": {
     "directory": "./public"
