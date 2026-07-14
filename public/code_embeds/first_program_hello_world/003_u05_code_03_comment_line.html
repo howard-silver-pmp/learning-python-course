@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>New Concept — Comment line</title>
+  <title>New Concept — Python Comment line</title>
   <style>
 * { box-sizing: border-box; }
 body {
@@ -91,7 +91,9 @@ pre.highlight {
     <pre class="highlight"><code><span class="tok-comment"># This comment block contains documentation for my program.</span></code></pre>
     <pre class="highlight"><code><span class="tok-comment"># ------------------------------------------------------------</span></code></pre>
   </div>
-  <textarea class="visually-hidden" id="rawCode"># This is your first program</textarea>
+  <textarea class="visually-hidden" id="rawCode"># ------------------------------------------------------------
+# This comment block contains documentation for my program.
+# ------------------------------------------------------------</textarea>  
   <script>
     async function copyCode() {
       const text = document.getElementById('rawCode').value;
