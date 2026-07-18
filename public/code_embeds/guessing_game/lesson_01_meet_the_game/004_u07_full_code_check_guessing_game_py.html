@@ -84,7 +84,6 @@ pre.highlight {
     <div class="code-header">
       <div>
         <div class="code-title">Full Code Check — guessing_game.py</div>
-        <div class="code-meta">Python · guessing_game.py · VS Code Dark 2026</div>
       </div>
       <button class="copy-button" type="button" onclick="copyCode()" id="copyButton">Copy Code</button>
     </div>
@@ -98,10 +97,10 @@ pre.highlight {
 
 <span class="tok-comment"># Check whether the player&#x27;s guess matches the secret number</span>
 <span class="tok-keyword">if</span> <span class="tok-variable">guess</span> <span class="tok-operator">==</span> <span class="tok-variable">secret_number</span><span class="tok-punctuation">:</span>
-    <span class="tok-comment"># This message runs only when the guess is correct</span>
+    <span class="tok-comment"># This message displays only when the guess is correct</span>
     <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;You got it!&quot;</span><span class="tok-punctuation">)</span>
 <span class="tok-keyword">else</span><span class="tok-punctuation">:</span>
-    <span class="tok-comment"># This message runs when the guess is not correct</span>
+    <span class="tok-comment"># This message displays when the guess is not correct</span>
     <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Not quite.&quot;</span><span class="tok-punctuation">)</span></code></pre>
   </div>
   <textarea class="visually-hidden" id="rawCode"># Store the secret number the player is trying to guess
@@ -114,10 +113,10 @@ guess = int(input(&quot;Enter your guess: &quot;))
 
 # Check whether the player&#x27;s guess matches the secret number
 if guess == secret_number:
-    # This message runs only when the guess is correct
+    # This message displays only when the guess is correct
     print(&quot;You got it!&quot;)
 else:
-    # This message runs when the guess is not correct
+    # This message displays when the guess is not correct
     print(&quot;Not quite.&quot;)</textarea>
   <script>
     async function copyCode() {
