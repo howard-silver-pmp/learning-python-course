@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Calculation Example</title>
+  <style>
+    :root {
+      --bg: #1e1e1e;
+      --panel: #1e1e1e;
+      --header: #252526;
+      --border: #3c3c3c;
+      --text: #d4d4d4;
+      --muted: #9aa7b3;
+      --button-bg: #0e639c;
+      --button-hover: #1177bb;
+      --button-text: #ffffff;
+      --comment: #9aa7b3;
+      --keyword: #c586c0;
+      --builtin: #c586c0;
+      --string: #9cdcfe;
+      --number: #b5cea8;
+      --variable: #d4d4d4;
+      --operator: #d4d4d4;
+      --punctuation: #d4d4d4;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Segoe UI", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    .code-card {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: var(--panel);
+      overflow: hidden;
+    }
+
+    .code-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem 1rem 0.75rem;
+      background: var(--header);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .code-title {
+      margin: 0;
+      color: var(--text);
+      font-size: 1rem;
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .code-language {
+      margin-top: 0.25rem;
+      color: var(--muted);
+      font-size: 0.78rem;
+      line-height: 1.2;
+    }
+
+    .copy-button {
+      flex: 0 0 auto;
+      border: 0;
+      border-radius: 0.35rem;
+      padding: 0.45rem 0.7rem;
+      background: var(--button-bg);
+      color: var(--button-text);
+      font-size: 0.78rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .copy-button:hover,
+    .copy-button:focus {
+      background: var(--button-hover);
+      outline: none;
+    }
+
+    .copy-button:focus-visible {
+      box-shadow: 0 0 0 2px #ffffff, 0 0 0 4px var(--button-bg);
+    }
+
+    pre {
+      margin: 0;
+      padding: 1rem;
+      overflow-x: auto;
+      background: var(--panel);
+      color: var(--text);
+      font-family: Consolas, "Cascadia Code", "Courier New", monospace;
+      font-size: 0.95rem;
+      line-height: 1.55;
+      tab-size: 4;
+    }
+
+    code {
+      font-family: inherit;
+      white-space: pre;
+    }
+
+    .tok-comment { color: var(--comment); }
+    .tok-keyword { color: var(--keyword); }
+    .tok-builtin { color: var(--builtin); }
+    .tok-string { color: var(--string); }
+    .tok-number { color: var(--number); }
+    .tok-variable { color: var(--variable); }
+    .tok-operator { color: var(--operator); }
+    .tok-punctuation { color: var(--punctuation); }
+
+    .raw-code {
+      position: absolute;
+      left: -9999px;
+      top: auto;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      opacity: 0;
+    }
+  </style>
+</head>
+<body>
+  <article class="code-card" aria-label="Calculation Example">
+    <header class="code-header">
+      <div>
+        <h1 class="code-title">Calculation Example</h1>
+      </div>
+<!--      <button class="copy-button" type="button" onclick="copyCode(this)">Copy Code</button> -->
+    </header>
+
+    <pre><code><span class="tok-comment"># A counter can be used inside a larger calculation.</span>
+<span class="tok-comment"># The player starts with a current score.</span>
+<span class="tok-variable">current_score</span> <span class="tok-operator">=</span> <span class="tok-number">100</span>
+
+<span class="tok-comment"># Each extra guess lowers the score by 10 points.</span>
+<span class="tok-comment"># The first guess is free, so subtract 1 from guess_count.</span>
+<span class="tok-variable">points_lost</span> <span class="tok-operator">=</span> <span class="tok-punctuation">(</span><span class="tok-variable">guess_count</span> <span class="tok-operator">-</span> <span class="tok-number">1</span><span class="tok-punctuation">)</span> <span class="tok-operator">*</span> <span class="tok-number">10</span>
+
+<span class="tok-comment"># Update the current score using the calculated points lost.</span>
+<span class="tok-variable">current_score</span> <span class="tok-operator">=</span> <span class="tok-variable">current_score</span> <span class="tok-operator">-</span> <span class="tok-variable">points_lost</span>
+
+<span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Your score is:&quot;</span><span class="tok-punctuation">)</span>
+<span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-variable">current_score</span><span class="tok-punctuation">)</span></code></pre>
+</article>
+
+<!--  <script>
+    async function copyCode(button) {
+      const rawCode = document.getElementById('raw-code').value;
+      const originalText = button.textContent;
+
+      try {
+        await navigator.clipboard.writeText(rawCode);
+        button.textContent = 'Copied!';
+      } catch (error) {
+        const textarea = document.getElementById('raw-code');
+        textarea.focus();
+        textarea.select();
+        document.execCommand('copy');
+        button.textContent = 'Copied!';
+      }
+
+      window.setTimeout(function () {
+        button.textContent = originalText;
+      }, 1800);
+    }
+  </script>  -->
+</body>
+</html>
