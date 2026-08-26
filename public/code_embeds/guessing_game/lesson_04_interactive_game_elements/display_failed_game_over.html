@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Display Remaining Attempts Left</title>
+  <title>Add Losing Game Over Display</title>
   <style>
 * { box-sizing: border-box; }
 body {
@@ -83,29 +83,23 @@ pre.highlight {
   <div class="code-card">
     <div class="code-header">
       <div>
-        <div class="code-title">Display Remaining Attempts Left</div>
+        <div class="code-title">Add Losing Game Over Display</div>
       </div>
       <button class="copy-button" type="button" onclick="copyCode()" id="copyButton">Copy Code</button>
     </div>
-    <pre class="highlight"><code>
-    <span class="tok-comment"># Calculate how many guesses the player has left</span>
-    <span class="tok-variable">remaining</span> <span class="tok-operator">=</span> <span class="tok-variable">max_attempts</span> <span class="tok-operator">-</span> <span class="tok-variable">attempts</span>
-
-    <span class="tok-comment"># Only show remaining guesses if the player has not already won</span>
-    <span class="tok-keyword">if</span> <span class="tok-variable">is_correct</span> <span class="tok-operator">==</span> <span class="tok-keyword">False</span><span class="tok-punctuation">:</span>
-        <span class="tok-comment"># Tell the player how many guesses remain</span>
-        <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;You have&quot;</span><span class="tok-punctuation">,</span> <span class="tok-variable">remaining</span><span class="tok-punctuation">,</span> <span class="tok-string">&quot;guesses left.&quot;</span><span class="tok-punctuation">)</span>
+    <pre class="highlight"><code><span class="tok-comment">
+<span class="tok-comment"># After the loop ends, check whether the player lost</span>
+<span class="tok-keyword">if</span> <span class="tok-variable">is_correct</span> <span class="tok-operator">==</span> <span class="tok-keyword">False</span><span class="tok-punctuation">:</span>
+    <span class="tok-comment"># Show the losing message</span>
+    <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Game over. The number was&quot;</span><span class="tok-punctuation">,</span> <span class="tok-variable">secret_number</span><span class="tok-punctuation">)</span>
 </code></pre>
   </div>
   <textarea class="visually-hidden" id="rawCode">
 
-    # Calculate how many guesses the player has left
-    remaining = max_attempts - attempts
-
-    # Only show remaining guesses if the player has not already won
-    if is_correct == False:
-        # Tell the player how many guesses remain
-        print(&quot;You have&quot;, remaining, &quot;guesses left.&quot;)
+# After the loop ends, check whether the player lost
+if is_correct == False:
+  # Show the losing message
+  print(&quot;Game over. The number was&quot;, secret_number)
 </textarea>
   <script>
 function copyCode() {
