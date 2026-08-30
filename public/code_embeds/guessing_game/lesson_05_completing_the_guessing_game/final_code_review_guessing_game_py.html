@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Final Code Review — guessing_game.py</title>
+  <style>
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  padding: 0;
+  background: #1e1e1e;
+  color: #d4d4d4;
+  font-family: Arial, sans-serif;
+}
+.code-card {
+  border: 1px solid #3c3c3c;
+  border-radius: 10px;
+  background: #1e1e1e;
+  overflow: hidden;
+}
+.code-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 10px 12px;
+  background: #252526;
+  border-bottom: 1px solid #3c3c3c;
+}
+.code-title {
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+}
+.code-meta {
+  font-size: 12px;
+  color: #c8c8c8;
+  margin-top: 2px;
+}
+.copy-button {
+  border: 1px solid #6a6a6a;
+  border-radius: 6px;
+  background: #333333;
+  color: #ffffff;
+  padding: 7px 10px;
+  font-size: 13px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.copy-button:hover { background: #3f3f46; }
+pre.highlight {
+  margin: 0;
+  padding: 16px;
+  overflow-x: auto;
+  white-space: pre;
+  tab-size: 4;
+  font-family: Consolas, 'Courier New', monospace;
+  font-size: 15px;
+  line-height: 1.55;
+  background: #1e1e1e;
+  color: #d4d4d4;
+}
+.visually-hidden { display: none; }
+.tok-comment { color: #9AA7B3; }
+.tok-todo { color: #F97583; font-weight: 700; }
+.tok-keyword { color: #C586C0; }
+.tok-module { color: #4EC9B0; }
+.tok-imported { color: #4EC9B0; }
+.tok-class { color: #4EC9B0; }
+.tok-function { color: #DCDCAA; }
+.tok-builtin { color: #C586C0; }
+.tok-string { color: #9CDCFE; }
+.tok-fstring-expr { color: #D7BA7D; }
+.tok-number { color: #B5CEA8; }
+.tok-constant { color: #9CDCFE; }
+.tok-variable { color: #D4D4D4; }
+.tok-operator { color: #D4D4D4; }
+.tok-punctuation { color: #D4D4D4; }
+  </style>
+</head>
+<body>
+  <div class="code-card">
+    <div class="code-header">
+      <div>
+        <div class="code-title">Final Code Review — guessing_game.py</div>
+      </div>
+      <button class="copy-button" type="button" onclick="copyCode()" id="copyButton">Copy Code</button>
+    </div>
+    <pre class="highlight"><code><span class="tok-comment"># Bring in the RANDOM module to use the randint() function to generate a random number</span>
+<span class="tok-keyword">import</span> <span class="tok-module">random</span>
+
+# Top loop: run the full game again if the player wants to play again</span>
+<span class="tok-keyword">while</span> <span class="tok-keyword">True</span><span class="tok-punctuation">:</span>
+    <span class="tok-comment"># Show a welcome message at the start of each round</span>
+    <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Welcome to the Guessing Game!&quot;</span><span class="tok-punctuation">)</span>
+    <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;-----------------------------&quot;</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-comment"># Store the secret number the player is trying to guess</span>
+    <span class="tok-variable">secret_number</span> <span class="tok-operator">=</span> <span class="tok-module">random</span><span class="tok-operator">.randint</span><span class="tok-punctuation">(</span><span class="tok-number">1</span><span class="tok-operator">,</span> <span class="tok-number">10</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-comment"># Track whether the player has guessed correctly</span>
+    <span class="tok-comment"># The game starts with this set to False because the player has not won yet</span>
+    <span class="tok-variable">is_correct</span> <span class="tok-operator">=</span> <span class="tok-keyword">False</span>
+
+    <span class="tok-comment"># Count how many guesses the player has made</span>
+    <span class="tok-comment"># The count starts at 0 because the player has not guessed yet</span>
+    <span class="tok-variable">attempts</span> <span class="tok-operator">=</span> <span class="tok-number">0</span>
+
+    <span class="tok-comment"># Ask the player to choose a difficulty level for this round</span>
+    <span class="tok-variable">difficulty</span> <span class="tok-operator">=</span> <span class="tok-builtin">input</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Choose a difficulty level (easy / medium / hard): &quot;</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-comment"># Set the number of guesses based on the difficulty</span>
+    <span class="tok-keyword">if</span> <span class="tok-variable">difficulty</span> <span class="tok-operator">==</span> <span class="tok-string">&quot;easy&quot;</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># Easy mode gives the player more guesses</span>
+        <span class="tok-variable">max_attempts</span> <span class="tok-operator">=</span> <span class="tok-number">5</span>
+    <span class="tok-keyword">elif</span> <span class="tok-variable">difficulty</span> <span class="tok-operator">==</span> <span class="tok-string">&quot;medium&quot;</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># Medium mode uses the normal number of guesses</span>
+        <span class="tok-variable">max_attempts</span> <span class="tok-operator">=</span> <span class="tok-number">3</span>
+    <span class="tok-keyword">else</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># Any other answer uses hard mode for now</span>
+        <span class="tok-variable">max_attempts</span> <span class="tok-operator">=</span> <span class="tok-number">2</span>
+
+    <span class="tok-comment"># Show the player which difficulty is active</span>
+    <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Difficulty:&quot;</span><span class="tok-punctuation">,</span> <span class="tok-variable">difficulty</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-comment"># Show the player how many guesses they get</span>
+    <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Guesses available:&quot;</span><span class="tok-punctuation">,</span> <span class="tok-variable">max_attempts</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-comment"># Keep running the game while the player has not guessed correctly</span>
+    <span class="tok-comment"># and still has guesses left</span>
+    <span class="tok-keyword">while</span> <span class="tok-variable">is_correct</span> <span class="tok-operator">==</span> <span class="tok-keyword">False</span> <span class="tok-keyword">and</span> <span class="tok-variable">attempts</span> <span class="tok-operator">&lt;</span> <span class="tok-variable">max_attempts</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># Ask the player to enter a guess</span>
+        <span class="tok-comment"># input() gets text from the player</span>
+        <span class="tok-comment"># int() changes that text into a number</span>
+        <span class="tok-variable">guess</span> <span class="tok-operator">=</span> <span class="tok-builtin">int</span><span class="tok-punctuation">(</span><span class="tok-builtin">input</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Enter your guess: &quot;</span><span class="tok-punctuation">)</span><span class="tok-punctuation">)</span>
+
+        <span class="tok-comment"># Increase the guess count by 1</span>
+        <span class="tok-variable">attempts</span> <span class="tok-operator">=</span> <span class="tok-variable">attempts</span> <span class="tok-operator">+</span> <span class="tok-number">1</span>
+
+        <span class="tok-comment"># Check whether the player&#x27;s guess matches the secret number</span>
+        <span class="tok-keyword">if</span> <span class="tok-variable">guess</span> <span class="tok-operator">==</span> <span class="tok-variable">secret_number</span><span class="tok-punctuation">:</span>
+            <span class="tok-comment"># Show the winning message</span>
+            <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Correct! You guessed the number.&quot;</span><span class="tok-punctuation">)</span>
+
+            <span class="tok-comment"># Show how many guesses the player used</span>
+            <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Total guesses:&quot;</span><span class="tok-punctuation">,</span> <span class="tok-variable">attempts</span><span class="tok-punctuation">)</span>
+
+            <span class="tok-comment"># Mark that the player guessed correctly so the loop can stop</span>
+            <span class="tok-variable">is_correct</span> <span class="tok-operator">=</span> <span class="tok-keyword">True</span>
+        <span class="tok-keyword">elif</span> <span class="tok-variable">guess</span> <span class="tok-operator">&gt;</span> <span class="tok-variable">secret_number</span><span class="tok-punctuation">:</span>
+            <span class="tok-comment"># This message runs when the guess is greater than the secret number</span>
+            <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Too high.&quot;</span><span class="tok-punctuation">)</span>
+        <span class="tok-keyword">else</span><span class="tok-punctuation">:</span>
+            <span class="tok-comment"># This message runs when the guess is lower than the secret number</span>
+            <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Too low.&quot;</span><span class="tok-punctuation">)</span>
+
+        <span class="tok-comment"># Calculate how many guesses the player has left</span>
+        <span class="tok-variable">remaining</span> <span class="tok-operator">=</span> <span class="tok-variable">max_attempts</span> <span class="tok-operator">-</span> <span class="tok-variable">attempts</span>
+
+        <span class="tok-comment"># Only show remaining guesses if the player has not already won</span>
+        <span class="tok-keyword">if</span> <span class="tok-variable">is_correct</span> <span class="tok-operator">==</span> <span class="tok-keyword">False</span><span class="tok-punctuation">:</span>
+            <span class="tok-comment"># Show how many guesses remain</span>
+            <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Guesses remaining:&quot;</span><span class="tok-punctuation">,</span> <span class="tok-variable">remaining</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-comment"># After the loop ends, check whether the player lost</span>
+    <span class="tok-keyword">if</span> <span class="tok-variable">is_correct</span> <span class="tok-operator">==</span> <span class="tok-keyword">False</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># Show the losing message</span>
+        <span class="tok-builtin">print</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Game over. The number was&quot;</span><span class="tok-punctuation">,</span> <span class="tok-variable">secret_number</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-comment"># Ask whether the player wants to play the full game again</span>
+    <span class="tok-variable">play_again</span> <span class="tok-operator">=</span> <span class="tok-builtin">input</span><span class="tok-punctuation">(</span><span class="tok-string">&quot;Play again? (Y/n): &quot;</span><span class="tok-punctuation">)</span>
+
+    <span class="tok-comment"># Stop the replay loop only if the player clearly says no</span>
+    <span class="tok-keyword">if</span> <span class="tok-variable">play_again</span> <span class="tok-operator">==</span> <span class="tok-string">&quot;n&quot;</span><span class="tok-punctuation">:</span>
+        <span class="tok-comment"># break exits the top loop, so the whole program ends</span>
+        <span class="tok-keyword">break</span></code></pre>
+  </div>
+  <textarea class="visually-hidden" id="rawCode"># Bring in the RANDOM module to use the randint() function to generate a random number
+import random
+
+# Top loop: run the full game again if the player wants to play again
+while True:
+    # Show a welcome message at the start of each round
+    print(&quot;Welcome to the Guessing Game!&quot;)
+    print(&quot;-----------------------------&quot;)
+
+    # Store the secret number the player is trying to guess
+    secret_number = random.randint(1, 10)
+
+    # Track whether the player has guessed correctly
+    # The game starts with this set to False because the player has not won yet
+    is_correct = False
+
+    # Count how many guesses the player has made
+    # The count starts at 0 because the player has not guessed yet
+    attempts = 0
+
+    # Ask the player to choose a difficulty level for this round
+    difficulty = input(&quot;Choose a difficulty level (easy / medium / hard): &quot;)
+
+    # Set the number of guesses based on the difficulty
+    if difficulty == &quot;easy&quot;:
+        # Easy mode gives the player more guesses
+        max_attempts = 5
+    elif difficulty == &quot;medium&quot;:
+        # Medium mode uses the normal number of guesses
+        max_attempts = 3
+    else:
+        # Any other answer uses hard mode for now
+        max_attempts = 2
+
+    # Show the player which difficulty is active
+    print(&quot;Difficulty:&quot;, difficulty)
+
+    # Show the player how many guesses they get
+    print(&quot;Guesses available:&quot;, max_attempts)
+
+    # Keep running the game while the player has not guessed correctly
+    # and still has guesses left
+    while is_correct == False and attempts &lt; max_attempts:
+        # Ask the player to enter a guess
+        # input() gets text from the player
+        # int() changes that text into a number
+        guess = int(input(&quot;Enter your guess: &quot;))
+
+        # Increase the guess count by 1
+        attempts = attempts + 1
+
+        # Check whether the player&#x27;s guess matches the secret number
+        if guess == secret_number:
+            # Show the winning message
+            print(&quot;Correct! You guessed the number.&quot;)
+
+            # Show how many guesses the player used
+            print(&quot;Total guesses:&quot;, attempts)
+
+            # Mark that the player guessed correctly so the loop can stop
+            is_correct = True
+        elif guess &gt; secret_number:
+            # This message runs when the guess is greater than the secret number
+            print(&quot;Too high.&quot;)
+        else:
+            # This message runs when the guess is lower than the secret number
+            print(&quot;Too low.&quot;)
+
+        # Calculate how many guesses the player has left
+        remaining = max_attempts - attempts
+
+        # Only show remaining guesses if the player has not already won
+        if is_correct == False:
+            # Show how many guesses remain
+            print(&quot;Guesses remaining:&quot;, remaining)
+
+    # After the loop ends, check whether the player lost
+    if is_correct == False:
+        # Show the losing message
+        print(&quot;Game over. The number was&quot;, secret_number)
+
+    # Ask whether the player wants to play the full game again
+    play_again = input(&quot;Play again? (Y/n): &quot;)
+
+    # Stop the replay loop only if the player clearly says no
+    if play_again == &quot;n&quot;:
+        # break exits the top loop, so the whole program ends
+        break</textarea>
+  <script>
+function copyCode() {
+  const raw = document.getElementById('rawCode').value;
+  const button = document.getElementById('copyButton');
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(raw).then(() => {
+      button.textContent = 'Copied!';
+      setTimeout(() => button.textContent = 'Copy Code', 1500);
+    }).catch(() => fallbackCopy(raw, button));
+  } else {
+    fallbackCopy(raw, button);
+  }
+}
+function fallbackCopy(raw, button) {
+  const area = document.createElement('textarea');
+  area.value = raw;
+  document.body.appendChild(area);
+  area.focus();
+  area.select();
+  try {
+    document.execCommand('copy');
+    button.textContent = 'Copied!';
+    setTimeout(() => button.textContent = 'Copy Code', 1500);
+  } catch (err) {
+    button.textContent = 'Copy failed';
+  }
+  document.body.removeChild(area);
+}
+  </script>
+</body>
+</html>
